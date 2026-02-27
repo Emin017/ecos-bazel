@@ -99,7 +99,8 @@ def cpp_runtime_bundle(
             bash $(location {autopatch_script}) \\
                 --dest-bin-dir "$$DEST_BIN" \\
                 --dest-lib-dir "$$DEST_LIB" \\
-                --ecc-py "$$DEST_BIN"
+                --ecc-py "$$DEST_BIN" \\
+                --runtime-lib-path "$$CMAKE_DIR/lib"
 
             tar -cf $@ -C "$$BUNDLE_ROOT" .
         """.format(
