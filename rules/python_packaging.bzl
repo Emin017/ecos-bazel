@@ -28,13 +28,17 @@ def python_pyinstaller_bundle(
     cmd_parts = ["set -euo pipefail"]
 
     if runtime_bundle:
-        cmd_parts.append("tar -xf $(location {}) -C .".format(runtime_bundle))
+        # --keep-directory-symlink: Bazel execroot uses directory symlinks for
+        # source packages.  Without this flag tar replaces the symlink with a
+        # real directory containing only the archive contents, which makes the
+        # rest of the source tree (e.g. Python modules) invisible to PyInstaller.
+        cmd_parts.append("tar -xf $(location {}) -C . --keep-directory-symlink".format(runtime_bundle))
 
     cmd_parts.extend([
-        "$(location {}) $(location {})".format(pyinstaller, spec_file),
-        "  --clean",
-        "  --noconfirm",
-        "  --distpath \"$(@D)/{}\"".format(name),
+        "$(location {}) $(location {}) \\".format(pyinstaller, spec_file),
+        "  --clean \\",
+        "  --noconfirm \\",
+        "  --distpath \"$(@D)\" \\",
         "  --workpath \"$(@D)/{}_work\"".format(name),
     ])
 
