@@ -1,0 +1,12 @@
+package(default_visibility = ["//visibility:public"])
+
+exports_files([
+    "download_and_extract.bzl",
+    "local_source_repo.bzl",
+    "python_packaging.bzl",
+    "uv_export.bzl",
+    "local_source_repo.BUILD.bazel",
+    "oss_cad_suite.BUILD.bazel",
+    "pdk_repo.BUILD.bazel",
+    "uv_export.BUILD.bazel",
+])
