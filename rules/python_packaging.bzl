@@ -73,7 +73,8 @@ def cpp_runtime_bundle(
     """
     native.genrule(
         name = name,
-        srcs = [cmake_target, autopatch_script, auto_patchelf_bin, patchelf],
+        srcs = [cmake_target],
+        tools = [autopatch_script, auto_patchelf_bin, patchelf],
         outs = ["{}/{}.tar".format(name, name)],
         tags = ["local", "no-sandbox"],
         cmd = """
