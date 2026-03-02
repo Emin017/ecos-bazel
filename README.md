@@ -194,6 +194,3 @@ use_repo(patchelf, "patchelf")
 - `patchelf`: Patchelf binary target (default: `@patchelf//:bin/patchelf`)
 - `visibility`: Target visibility
 
-## License
-
-Apache 2.0
