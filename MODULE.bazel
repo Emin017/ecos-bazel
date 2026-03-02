@@ -21,3 +21,7 @@ use_repo(pip, "pypi_autopatchelf")
 icsprout55_pdk = use_extension("//rules:icsprout55_pdk.bzl", "icsprout55_pdk")
 icsprout55_pdk.configure(enable_proxy = True)  # Optional: enable proxy for download
 use_repo(icsprout55_pdk, "icsprout55_pdk")
+
+# OSS CAD Suite dependencies
+oss_cad_suite = use_extension("//rules:oss_cad_suite.bzl", "oss_cad_suite")
+use_repo(oss_cad_suite, "oss_cad_suite")
