@@ -16,3 +16,8 @@ pip.parse(
     requirements_lock = "//tools/auto-patchelf:requirements.txt",
 )
 use_repo(pip, "pypi_autopatchelf")
+
+# PDK dependencies
+icsprout55_pdk = use_extension("//rules:icsprout55_pdk.bzl", "icsprout55_pdk")
+icsprout55_pdk.configure(enable_proxy = True)  # Optional: enable proxy for download
+use_repo(icsprout55_pdk, "icsprout55_pdk")
