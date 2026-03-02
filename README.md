@@ -7,6 +7,10 @@ Generic Bazel rules and utilities for Python and C++ packaging, designed for EDA
 - **Repository Rules**: Generic rules for downloading archives and importing local sources
 - **Python Packaging**: PyInstaller-based bundling with runtime dependency management
 - **C++ Runtime Bundling**: Automatic RPATH patching and dependency bundling with auto-patchelf
+- **Module Extensions**: Pre-configured dependencies for EDA workflows
+  - ICSprout55 PDK (Process Design Kit)
+  - OSS CAD Suite (Yosys, nextpnr, and other open-source EDA tools)
+  - Patchelf (ELF binary modification tool)
 - **Portable**: Parameterized paths work across different project structures
 
 ## Usage
@@ -21,6 +25,17 @@ local_path_override(
     module_name = "ecos-bazel",
     path = "path/to/ecos-bazel-rules",
 )
+
+# Use module extensions
+icsprout55_pdk = use_extension("@ecos-bazel//rules:icsprout55_pdk.bzl", "icsprout55_pdk")
+icsprout55_pdk.configure(enable_proxy = True)  # Optional: enable proxy for download
+use_repo(icsprout55_pdk, "icsprout55_pdk")
+
+oss_cad_suite = use_extension("@ecos-bazel//rules:oss_cad_suite.bzl", "oss_cad_suite")
+use_repo(oss_cad_suite, "oss_cad_suite")
+
+patchelf = use_extension("@ecos-bazel//rules:patchelf.bzl", "patchelf")
+use_repo(patchelf, "patchelf")
 ```
 
 ### Repository Rules
@@ -90,6 +105,68 @@ cpp_runtime_bundle(
     so_pattern = "*.so",
 )
 ```
+
+### Module Extensions
+
+#### ICSprout55 PDK
+
+Process Design Kit for digital synthesis:
+
+```python
+icsprout55_pdk = use_extension("@ecos-bazel//rules:icsprout55_pdk.bzl", "icsprout55_pdk")
+icsprout55_pdk.configure(enable_proxy = True)  # Optional: enable proxy for download
+use_repo(icsprout55_pdk, "icsprout55_pdk")
+
+# Use in BUILD files
+cc_library(
+    name = "my_design",
+    srcs = ["my_design.v"],
+    deps = ["@icsprout55_pdk//:cells"],
+)
+```
+
+**Configuration:**
+- `enable_proxy`: If `True`, uses proxy for downloading PDK files (default: `False`)
+
+**Version:** Commit `e696e09` (pinned)
+
+#### OSS CAD Suite
+
+Open-source EDA tools including Yosys, nextpnr, and more:
+
+```python
+oss_cad_suite = use_extension("@ecos-bazel//rules:oss_cad_suite.bzl", "oss_cad_suite")
+use_repo(oss_cad_suite, "oss_cad_suite")
+
+# Use in BUILD files
+sh_binary(
+    name = "synthesize",
+    srcs = ["synthesize.sh"],
+    data = ["@oss_cad_suite//:yosys"],
+)
+```
+
+**Version:** 2026-01-22 (pinned)
+
+**Included Tools:**
+- Yosys (Verilog synthesis)
+- nextpnr (FPGA place & route)
+- OpenROAD (ASIC physical design)
+- And more...
+
+#### Patchelf
+
+ELF binary modification tool for RPATH patching:
+
+```python
+patchelf = use_extension("@ecos-bazel//rules:patchelf.bzl", "patchelf")
+use_repo(patchelf, "patchelf")
+
+# Use in BUILD files
+# @patchelf//:bin/patchelf
+```
+
+**Version:** 0.18.0 (pinned)
 
 ## API Reference
 
