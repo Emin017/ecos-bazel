@@ -5,6 +5,7 @@ exports_files([
     "icsprout55_pdk.bzl",
     "local_source_repo.bzl",
     "oss_cad_suite.bzl",
+    "patchelf.bzl",
     "python_packaging.bzl",
     "uv_export.bzl",
     "local_source_repo.BUILD.bazel",

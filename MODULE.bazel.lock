@@ -197,6 +197,28 @@
         "recordedRepoMappingEntries": []
       }
     },
+    "//rules:patchelf.bzl%patchelf": {
+      "general": {
+        "bzlTransitiveDigest": "AFzYBso+CG+yLIee4gmiWLkWo0vVUfDLJYJD4BHy7tA=",
+        "usagesDigest": "NQEZ2L72mgVEB+50j+MW8L7uXio85dQjnB2XKGoIozc=",
+        "recordedFileInputs": {},
+        "recordedDirentsInputs": {},
+        "envVariables": {},
+        "generatedRepoSpecs": {
+          "patchelf": {
+            "repoRuleId": "@@//rules:download_and_extract.bzl%download_and_extract",
+            "attributes": {
+              "urls": [
+                "https://github.com/NixOS/patchelf/releases/download/0.18.0/patchelf-0.18.0-x86_64.tar.gz"
+              ],
+              "sha256": "ce84f2447fb7a8679e58bc54a20dc2b01b37b5802e12c57eece772a6f14bf3f0",
+              "build_file_content": "exports_files([\"bin/patchelf\"])"
+            }
+          }
+        },
+        "recordedRepoMappingEntries": []
+      }
+    },
     "@@rules_python+//python/extensions:config.bzl%config": {
       "general": {
         "bzlTransitiveDigest": "W97kKxM+lW7l/kO0rQa7Jm31CA1j+W1bNHGKjwX5xMg=",
