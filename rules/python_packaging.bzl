@@ -6,6 +6,7 @@ def python_pyinstaller_bundle(
         srcs = [],
         runtime_bundle = None,
         output_name = None,
+        env = {},
         pyinstaller = "@ecos-bazel//tools:pyinstaller",
         visibility = None):
     """Bundle Python application using PyInstaller.
@@ -16,6 +17,7 @@ def python_pyinstaller_bundle(
         srcs: Additional source files needed for bundling
         runtime_bundle: Optional runtime dependencies tarball to extract
         output_name: Output binary name (defaults to name)
+        env: Environment variables to export before running PyInstaller
         pyinstaller: PyInstaller tool target
         visibility: Target visibility
     """
@@ -26,6 +28,9 @@ def python_pyinstaller_bundle(
         all_srcs.append(runtime_bundle)
 
     cmd_parts = ["set -euo pipefail"]
+
+    for k, v in env.items():
+        cmd_parts.append("export {}=\"{}\"".format(k, v))
 
     if runtime_bundle:
         # --keep-directory-symlink: Bazel execroot uses directory symlinks for
