@@ -24,7 +24,7 @@ use_repo(icsprout55_pdk, "icsprout55_pdk")
 
 # OSS CAD Suite dependencies
 oss_cad_suite = use_extension("//rules:oss_cad_suite.bzl", "oss_cad_suite")
-use_repo(oss_cad_suite, "oss_cad_suite")
+use_repo(oss_cad_suite, "oss_cad_suite", "oss_cad_suite_pruned")
 
 # Patchelf dependencies
 patchelf = use_extension("//rules:patchelf.bzl", "patchelf")

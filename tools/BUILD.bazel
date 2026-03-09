@@ -5,6 +5,7 @@ package(default_visibility = ["//visibility:public"])
 exports_files([
     "pyinstaller.sh",
     "autopatch-runtime.sh",
+    "prune-oss-cad-suite.sh",
 ])
 
 sh_binary(
