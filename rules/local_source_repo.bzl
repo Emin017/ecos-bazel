@@ -26,6 +26,10 @@ def _local_source_repo_impl(ctx):
         workspace_root = str(ctx.workspace_root)
         src_path = workspace_root + "/" + path_str
 
+    # Watch the source tree so Bazel only re-fetches when contents change,
+    # instead of re-fetching on every build (which `local = True` would do).
+    ctx.watch_tree(ctx.path(src_path))
+
     result = ctx.execute(
         ["bash", "-c", """
             set -euo pipefail
@@ -65,6 +69,6 @@ local_source_repo = repository_rule(
             doc = "Path to the local source directory (absolute or workspace-relative).",
         ),
     },
-    local = True,
+    local = False,
     doc = "Imports local source tree, stripping BUILD/WORKSPACE files for cmake() compatibility.",
 )
