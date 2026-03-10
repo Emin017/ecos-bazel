@@ -1,6 +1,7 @@
 package(default_visibility = ["//visibility:public"])
 
 exports_files([
+    "appimage-tool.bzl",
     "download_and_extract.bzl",
     "icsprout55_pdk.bzl",
     "local_source_repo.bzl",

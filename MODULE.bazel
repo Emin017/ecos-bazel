@@ -29,3 +29,7 @@ use_repo(oss_cad_suite, "oss_cad_suite", "oss_cad_suite_pruned")
 # Patchelf dependencies
 patchelf = use_extension("//rules:patchelf.bzl", "patchelf")
 use_repo(patchelf, "patchelf")
+
+# AppImage tool
+appimage_tool = use_extension("//rules:appimage-tool.bzl", "appimage_tool")
+use_repo(appimage_tool, "appimagetool_x86_64_linux")
