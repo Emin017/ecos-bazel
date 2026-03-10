@@ -85,7 +85,8 @@ echo "Pruning OSS CAD Suite at: $ROOT"
 yosys_bins=()
 for f in "${ROOT}"/bin/yosys "${ROOT}"/bin/yosys-* \
          "${ROOT}"/bin/abc \
-         "${ROOT}"/libexec/yosys "${ROOT}"/libexec/yosys-*; do
+         "${ROOT}"/libexec/yosys "${ROOT}"/libexec/yosys-* \
+         "${ROOT}"/share/yosys/plugins/slang.so; do
     [ -f "$f" ] || continue
     yosys_bins+=("$f")
 done
@@ -134,6 +135,7 @@ fi
 
 # Basename globs for libs we always keep
 required_lib_patterns=(
+    "ld-linux*.so*"
     "libc.so*" "libc-*.so" "libm.so*" "libm-*.so"
     "libz.so*" "libgcc_s.so*" "libstdc++.so*"
     "libffi.so*" "libreadline.so*"
