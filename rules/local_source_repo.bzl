@@ -45,7 +45,9 @@ def _local_source_repo_impl(ctx):
                 -o -name WORKSPACE.bazel \
             \\) -delete
             # Remove files with non-printable chars in names (Bazel label restriction).
-            find . -type f | LC_ALL=C grep '[^[:print:]/]' | while IFS= read -r f; do
+            # Subshell with || true prevents grep exit-code 1 (no matches) from
+            # aborting under pipefail while keeping output flowing to the pipe.
+            (find . -type f | LC_ALL=C grep '[^[:print:]/]' || true) | while IFS= read -r f; do
                 rm -f "$f"
             done
         """.format(src = src_path)],
